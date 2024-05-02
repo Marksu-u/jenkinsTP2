@@ -3,12 +3,12 @@ pipeline {
 
     environment {
         ID_DOCKER = "${ID_DOCKER_PARAMS}"
-        IMAGE_NAME = "jk-flash-tp"
+        IMAGE_NAME = "jk-go-tp"
         IMAGE_TAG = "latest"
         DOCKERHUB_PASSWORD = "${DOCKERHUB_PASSWORD_PARAMS}"
         RENDER_API_TOKEN = credentials('RENDER_APIKEY')
-        RENDER_SERVICE_ID = "srv-copbcoen7f5s73b3dup0"
-        RENDER_DEPLOY_HOOK_URL = credentials('RENDER_DEPLOY_HOOK_URL')
+        RENDER_SERVICE_ID = "srv-copl7stjm4es73a5uv70"
+        RENDER_DEPLOY_HOOK_URL = credentials('RENDER_DEPLOY_HOOK_URL_TP2')
     }
 
     triggers {
