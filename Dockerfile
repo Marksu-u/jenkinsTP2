@@ -1,8 +1,10 @@
-FROM python:3.9-slim
+FROM golang:1.22-alpine as builder
 WORKDIR /app
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install gunicorn
+COPY go.mod go.sum ./
+RUN go mod download && go mod tidy
 COPY . .
-EXPOSE 5000
-CMD ["gunicorn", "--workers=3", "--bind", "0.0.0.0:5000", "main:app"]
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /main .
+FROM scratch
+COPY --from=builder /main /main
+EXPOSE 8080
+CMD ["/main"]
